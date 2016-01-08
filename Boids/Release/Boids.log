@@ -1,15 +1,28 @@
-﻿Build started 06/01/2016 16:56:28.
+﻿Build started 08/01/2016 17:33:47.
      1>Project "C:\Subjects\Artificial Intelligence For Games\Project\Asteroid Wars\Boids\Boids.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML-2.3.2\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
-         main.cpp
-     1>main.cpp(61): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
-     1>main.cpp(63): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>main.cpp(63): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
-     1>main.cpp(102): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML-2.3.2\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Boid.cpp
+         Boid.cpp
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\Boid.h(42): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\Boid.h(45): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\Boid.h(52): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\Boid.h(53): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\Boid.h(57): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\Boid.h(58): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Boid.cpp(47): warning C4018: '<' : signed/unsigned mismatch
+     1>Boid.cpp(110): warning C4018: '<' : signed/unsigned mismatch
+     1>Boid.cpp(149): warning C4018: '<' : signed/unsigned mismatch
+     1>Boid.cpp(160): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Boid.cpp(188): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>Boid.cpp(264): warning C4018: '<' : signed/unsigned mismatch
+     1>Boid.cpp(281): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Subjects\Artificial Intelligence For Games\Project\Asteroid Wars\Release\Flock.exe" /NOLOGO /LIBPATH:"C:\SFML-2.3.2\lib" "sfml-graphics.lib" "sfml-window.lib" "sfml-system.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Subjects\Artificial Intelligence For Games\Project\Asteroid Wars\Release\Flock.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Subjects\Artificial Intelligence For Games\Project\Asteroid Wars\Release\Flock.lib" /MACHINE:X86 /SAFESEH Release\InputManager.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Subjects\Artificial Intelligence For Games\Project\Asteroid Wars\Release\Flock.exe" /NOLOGO /LIBPATH:"C:\SFML-2.3.2\lib" "sfml-graphics.lib" "sfml-window.lib" "sfml-system.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Subjects\Artificial Intelligence For Games\Project\Asteroid Wars\Release\Flock.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Subjects\Artificial Intelligence For Games\Project\Asteroid Wars\Release\Flock.lib" /MACHINE:X86 /SAFESEH Release\Boid.obj
+         Release\Bullet.obj
+         Release\Flock.obj
+         Release\InputManager.obj
          Release\Playership.obj
+         Release\Pvector.obj
          Release\Spaceship.obj
          Release\tiledBackground.obj
          Release\main.obj
@@ -20,4 +33,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.05
+Time Elapsed 00:00:01.34
