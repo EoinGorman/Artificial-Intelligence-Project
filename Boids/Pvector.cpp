@@ -83,7 +83,7 @@ void Pvector::limit(double max)
 {
 	double size = magnitude();
 
-	if (size > max)
+	if (size > max)	
 	{
 		set(x / size, y / size);
 	}

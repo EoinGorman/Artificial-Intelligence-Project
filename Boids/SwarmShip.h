@@ -20,12 +20,13 @@ public:
 	SwarmShip(sf::Vector2f pos, sf::Vector2f dir, sf::FloatRect bounds);
 	void Update(float deltaTime, vector<SwarmShip*> otherShips, Pvector targetPos);
 	State GetState();
+	void SetState(State newState);
 
 	//Variables
 
 private:
 	//Functions
-	void Move();
+	void Move(float deltaTime);
 	float Angle();
 	void ApplyForce(Pvector force);
 	void Swarm(vector<SwarmShip*> otherShips, Pvector targetPos);
@@ -35,7 +36,6 @@ private:
 	State currentState;
 	Pvector velocity;
 	Pvector acceleration;
-	float maxSpeed;
 	float maxForce;
 };
 
