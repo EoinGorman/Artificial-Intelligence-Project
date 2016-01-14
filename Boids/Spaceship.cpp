@@ -1,5 +1,3 @@
-#include "SFML/Window.hpp"
-#include "SFML/Graphics.hpp"
 #include "Spaceship.h"
 #include "Bullet.h"
 
@@ -52,14 +50,14 @@ void Spaceship::Move(float deltaTime)
 	//"Space Friction"
 	if (m_speed > 0)
 	{
-		m_speed -= 0.1 * deltaTime;	
+		m_speed -= 50 * deltaTime;	
 	}
 	else if (m_speed < 0)
 	{
-		m_speed += 0.1 * deltaTime;
+		m_speed += 50 * deltaTime;
 	}
 
-	m_position += m_direction * m_speed;
+	m_position += m_direction * m_speed * deltaTime;
 	m_sprite.setPosition(m_position);
 }
 

@@ -1,6 +1,10 @@
 #ifndef SPACESHIP 
 #define SPACESHIP
 
+#include "SFML/Window.hpp"
+#include "SFML/Graphics.hpp"
+
+#define PI 3.14159265
 class Spaceship
 {
 public:

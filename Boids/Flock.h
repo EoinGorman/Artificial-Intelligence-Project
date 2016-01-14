@@ -39,7 +39,7 @@ public:
 	//Mutator Functions
 	void addBoid(Boid b);
 	void flocking();
-	void swarming();
+	void swarming(Pvector targetPos);
 
 };
 

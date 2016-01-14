@@ -4,8 +4,7 @@
 #include "Bullet.h"
 #include "Spaceship.h"
 #include "Playership.h"
-#define PI 3.14159265
-#define MaxSpeed 0.1
+#define MaxSpeed 150
 
 Playership::Playership(sf::Vector2f pos, sf::Vector2f dir, sf::FloatRect bounds)
 	: Spaceship(pos, dir, bounds)
@@ -31,20 +30,20 @@ void Playership::Update(float deltaTime)
 	if (InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::Left))
 	{
 		//m_direction
-		m_rotation -= 70 * deltaTime;
+		m_rotation -= 120 * deltaTime;
 	}
 
 	else if (InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::Right))
 	{
 		//m_direction
-		m_rotation += 70 * deltaTime;
+		m_rotation += 120 * deltaTime;
 	}
 
 	if (InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::Up))
 	{
 		//m_direction
 		if (m_speed < MaxSpeed)
-			m_speed += 1 * deltaTime;
+			m_speed += 10;
 		else
 			m_speed = MaxSpeed;
 	}
@@ -54,7 +53,7 @@ void Playership::Update(float deltaTime)
 		//m_direction
 
 		if (m_speed > -MaxSpeed)
-			m_speed -= 1 * deltaTime;
+			m_speed -= 10;
 		else
 			m_speed = -MaxSpeed;
 	}
@@ -76,6 +75,7 @@ void Playership::Update(float deltaTime)
 
 	m_sprite.setRotation(m_rotation);
 	m_direction = sf::Vector2f(cos(m_rotation*PI / 180), sin(m_rotation*PI / 180));
+	
 	Spaceship::Update(deltaTime);
 }
 

@@ -81,7 +81,7 @@ public:
 	void flock(vector <Boid> v);
 	void borders();
 	float angle(Pvector v);
-	void swarm(vector <Boid> v);
+	void swarm(vector <Boid> v, Pvector targetPos);
 };
 
 #endif

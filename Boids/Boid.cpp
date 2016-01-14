@@ -225,10 +225,22 @@ void Boid::flock(vector<Boid> v)
 // Checks if boids go out of the window and if so, wraps them around to the other side.
 void Boid::borders()
 {
-	if (location.x < 0) location.x += w_width; 
-	if (location.y < 0) location.y += w_height;
-	if (location.x > 1000) location.x -= w_width;
-	if (location.y > 1000) location.y -= w_height;
+	if (location.x < -w_width)
+	{
+		location.x += w_width * 3;
+	}
+	if (location.y < -w_height)
+	{
+		location.y += w_height * 3;
+	}
+	if (location.x > w_width * 2)
+	{
+		location.x -= w_width * 3;
+	}
+	if (location.y > w_height * 2)
+	{
+		location.y -= w_height * 3;
+	}
 }
 
 // Calculates the angle for the velocity of a boid which allows the visual 
@@ -240,7 +252,7 @@ float Boid::angle(Pvector v)
 	return angle;
 }
 
-void Boid::swarm(vector <Boid> v)
+void Boid::swarm(vector <Boid> v, Pvector targetPos)
 {
 /*		Lenard-Jones Potential function
 			Vector R = me.position - you.position
@@ -261,21 +273,43 @@ void Boid::swarm(vector <Boid> v)
 	float M = 2;
 	int count = 0;
 
-	for (int i = 0; i < v.size(); i++)
+
+	//Intercept
+	if (location.distance(targetPos) < (neighbordist))
 	{
-		float d = location.distance(v[i].location);
-		if ((d > 0) && (d < neighbordist)) // 0 < d < 50
+		Pvector dirToTarget = targetPos;
+		dirToTarget.subVector(location);
+
+		dirToTarget.normalize();
+		sum.addVector(dirToTarget);
+	}
+
+	//Swarm
+	else
+	{
+		for (int i = 0; i < v.size(); i++)
 		{
-			R = location;
-			R.subVector(v[i].location);
+			Pvector dirToTarget = targetPos;
+			dirToTarget.subVector(location);
 
-			float D = R.magnitude();
-			float U = -A / pow(D, N) + B / pow(D, M);
-			R.normalize();
+			float d = location.distance(v[i].location);
+			if ((d > 0) && (d < neighbordist)) // 0 < d < 50
+			{
+				R = location;
+				R.subVector(v[i].location);
 
-			R.mulScalar(U);
-			sum.addVector(R);
-			count++;
+				float D = R.magnitude();
+				float U = -A / pow(D, N) + B / pow(D, M);
+				R.normalize();
+
+				R.mulScalar(U);
+				sum.addVector(R);
+
+				dirToTarget.normalize();
+				dirToTarget.mulScalar(0.015f);
+				sum.addVector(dirToTarget);
+				count++;
+			}
 		}
 	}
 
@@ -283,7 +317,6 @@ void Boid::swarm(vector <Boid> v)
 		sum.divScalar(count);
 
 //MY CODE ---------------------------------
-
 	applyForce(sum);
 	update();
 	borders();

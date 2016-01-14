@@ -2,7 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "Bullet.h"
 #define PI 3.14159265
-#define MaxSpeed 0.2
+#define MaxSpeed 350
 
 //PUBLIC
 Bullet::Bullet()
@@ -67,7 +67,7 @@ sf::Vector2f Bullet::GetPosition()
 
 void Bullet::Move(float deltaTime)
 {
-	m_position += m_direction * m_speed;
+	m_position += m_direction * m_speed * deltaTime;
 	m_sprite.setPosition(m_position);
 }
 
