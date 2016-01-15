@@ -95,3 +95,9 @@ void Bullet::CheckBounds()
 		offScreen = true;
 	}
 }
+
+
+sf::Rect<float> Bullet::GetBounds()
+{
+	return m_sprite.getGlobalBounds();
+}

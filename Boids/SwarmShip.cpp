@@ -1,5 +1,5 @@
 #include "SwarmShip.h"
-#define MaxSpeed 0
+#define MaxSpeed 200
 
 SwarmShip::SwarmShip(sf::Vector2f pos, sf::Vector2f dir, sf::FloatRect bounds)
 	: Spaceship(pos, dir, bounds)
@@ -35,15 +35,32 @@ void SwarmShip::SetState(State newState)
 
 void SwarmShip::Move(float deltaTime)
 {
-	//To make the slow down not as abrupt
-	acceleration.mulScalar(0.1);
-	// Update velocity
-	velocity.addVector(acceleration);
-	// Limit speed
-	velocity.limit(MaxSpeed);
-	m_position += sf::Vector2f(velocity.x, velocity.y) * deltaTime;
-	// Reset accelertion to 0 each cycle
-	acceleration.mulScalar(0);
+	switch (currentState)
+	{
+	case State::Swarming:
+		//To make the slow down not as abrupt
+		acceleration.mulScalar(0.5);
+		// Update velocity
+		velocity.addVector(acceleration);
+		// Limit speed
+		velocity.limit(MaxSpeed);
+		m_position += sf::Vector2f(velocity.x, velocity.y) * (deltaTime);
+		// Reset accelertion to 0 each cycle
+		acceleration.mulScalar(0);
+
+		break;
+	case State::Intercepting:
+		//To make the slow down not as abrupt
+		acceleration.mulScalar(0.5);
+		// Update velocity
+		velocity.addVector(acceleration);
+		// Limit speed
+		velocity.normalize();
+		m_position += sf::Vector2f(velocity.x, velocity.y) * (deltaTime * (MaxSpeed/2));
+		// Reset accelertion to 0 each cycle
+		acceleration.mulScalar(0);
+		break;
+	}
 
 	//Update Sprite
 	m_sprite.setPosition(m_position);
@@ -62,10 +79,10 @@ void SwarmShip::Swarm(vector<SwarmShip*> otherShips, Pvector targetPos)
 	Pvector	R;
 	Pvector sum(0, 0);
 	float neighbordist = 500;
-	float A = 100;
-	float B = 5000;
-	float N = 1;
-	float M = 2;
+	float A = 200;
+	float B = 700;
+	float N = 0.65f;
+	float M = 1;
 	int count = 0;
 	Pvector location = Pvector(m_position.x, m_position.y);
 	Pvector dirToTarget = targetPos;
@@ -88,11 +105,11 @@ void SwarmShip::Swarm(vector<SwarmShip*> otherShips, Pvector targetPos)
 			R.mulScalar(U);
 			sum.addVector(R);
 
-			dirToTarget.normalize();
-			dirToTarget.mulScalar(0.015f);
-			sum.addVector(dirToTarget);
 			count++;
 		}
+		dirToTarget.normalize();
+		dirToTarget.mulScalar(0.1f);
+		sum.addVector(dirToTarget);
 	}
 
 	if (count > 0)
@@ -109,7 +126,7 @@ void SwarmShip::Intercept(Pvector targetPos)
 	Pvector dirToTarget = targetPos;
 	dirToTarget.subVector(Pvector(m_position.x, m_position.y));
 
-	//dirToTarget.normalize();
+	dirToTarget.normalize();
 	sum.addVector(dirToTarget);
 
 	ApplyForce(sum);
@@ -127,4 +144,10 @@ float SwarmShip::Angle()
 void SwarmShip::ApplyForce(Pvector force)
 {
 	acceleration.addVector(force);
+}
+
+
+sf::Rect<float> SwarmShip::GetBounds()
+{
+	return m_sprite.getGlobalBounds();
 }

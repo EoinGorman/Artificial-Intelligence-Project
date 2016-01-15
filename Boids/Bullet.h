@@ -11,6 +11,7 @@ public:
 	void Draw(sf::RenderWindow* window);
 	bool OutOfBounds();
 	sf::Vector2f GetPosition();
+	sf::Rect<float> GetBounds();
 
 private:
 	//Functions

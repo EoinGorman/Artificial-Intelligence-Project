@@ -133,6 +133,8 @@
   <ItemGroup>
     <ClCompile Include="Boid.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Factory.cpp" />
+    <ClCompile Include="FactoryFlock.cpp" />
     <ClCompile Include="Flock.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Playership.cpp" />
@@ -148,6 +150,8 @@
   <ItemGroup>
     <ClInclude Include="Boid.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Factory.h" />
+    <ClInclude Include="FactoryFlock.h" />
     <ClInclude Include="Flock.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Playership.h" />

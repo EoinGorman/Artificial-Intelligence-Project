@@ -94,12 +94,27 @@ int main()
 		//UPDATE HERE!!! 
 
 		float deltaTime = deltaClock.getElapsedTime().asSeconds();
-		player.Update(deltaTime);
-
 		deltaClock.restart();
 
+		player.Update(deltaTime);
 		swarm.Update(deltaTime, Pvector(player.GetPosition().x, player.GetPosition().y));
 
+		//Collision between bullets and swarm
+		std::vector<sf::FloatRect> bulletBounds = player.GetBulletBounds();
+		std::vector<sf::FloatRect> swarmBounds = swarm.GetSwarmBounds();
+		for (int i = 0; i < bulletBounds.size(); i++)
+		{
+			for (int j = 0; j < swarmBounds.size(); j++)
+			{
+				if (bulletBounds[i].intersects(swarmBounds[j]))
+				{
+					player.DestroyBullet(i);
+					swarm.DestroyShip(j);
+					goto here;
+				}
+			}
+		}
+		here:
 		InputManager::GetInstance()->UpdateState();
 
 		//Clears previous frames of visualization to not have clutter. (And simulate animation)

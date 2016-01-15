@@ -11,6 +11,9 @@ public:
 	void Update(float deltaTime, Pvector targetPos);
 	void Draw(sf::RenderWindow* window);
 
+	void DestroyShip(int index);
+	std::vector<sf::Rect<float>> Swarm::GetSwarmBounds();
+
 private:
 	std::vector<SwarmShip*> swarm;
 };

@@ -10,6 +10,9 @@ public:
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow* window);
 
+	void DestroyBullet(int index);
+	std::vector<sf::Rect<float>> GetBulletBounds();
+
 	//Variables
 
 private:

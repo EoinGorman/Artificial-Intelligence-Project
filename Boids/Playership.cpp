@@ -88,3 +88,25 @@ void Playership::Draw(sf::RenderWindow* window)
 		m_bullets.at(i)->Draw(window);
 	}
 }
+
+
+void Playership::DestroyBullet(int index)
+{
+	delete m_bullets.at(index);
+	m_bullets.erase(m_bullets.begin() + index);
+}
+
+
+std::vector<sf::Rect<float>> Playership::GetBulletBounds()
+{
+	std::vector<sf::Rect<float>> bulletBounds;
+	if (m_bullets.size() > 0)
+	{
+		for (int i = 0; i < m_bullets.size(); i++)
+		{
+			bulletBounds.push_back(m_bullets[i]->GetBounds());
+		}
+	}
+
+	return bulletBounds;
+}

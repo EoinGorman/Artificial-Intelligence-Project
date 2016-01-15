@@ -3,6 +3,7 @@
 
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"
+#include "Pvector.h"
 
 #define PI 3.14159265
 class Spaceship
