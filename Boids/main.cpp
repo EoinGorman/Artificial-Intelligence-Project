@@ -9,6 +9,7 @@
 #include "Playership.h"
 #include "Pvector.h"
 #include "Swarm.h"
+#include "FactoryFlock.h"
 
 using namespace std;
 
@@ -68,6 +69,9 @@ int main()
 	//Create swarm
 	Swarm swarm(50, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
 
+	//Create Factories
+	FactoryFlock factoryFlock(10, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
+
 	while (window.isOpen())
 	{
 		//Event used to close program when window is closed
@@ -98,6 +102,7 @@ int main()
 
 		player.Update(deltaTime);
 		swarm.Update(deltaTime, Pvector(player.GetPosition().x, player.GetPosition().y));
+		factoryFlock.Update(deltaTime);
 
 		//Collision between bullets and swarm
 		std::vector<sf::FloatRect> bulletBounds = player.GetBulletBounds();
@@ -130,6 +135,7 @@ int main()
 		background.Draw(&window);
 		player.Draw(&window);
 		swarm.Draw(&window);
+		factoryFlock.Draw(&window);
 
 		//Updates the window with current values of any data that was modified.
 		window.display();

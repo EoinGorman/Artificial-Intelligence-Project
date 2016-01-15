@@ -7,7 +7,7 @@ FactoryFlock::FactoryFlock(int amount, sf::FloatRect bounds)
 	{
 		float randX = std::rand() % 5000;
 		float randY = std::rand() % 3500;
-		//flock.push_back(new Factory(sf::Vector2f(randX, randY), sf::Vector2f(0, 0), bounds));
+		flock.push_back(new Factory(sf::Vector2f(randX, randY), sf::Vector2f(0, 0), bounds));
 	}
 }
 
@@ -16,7 +16,7 @@ void FactoryFlock::Update(float deltaTime)
 	//Update Flock
 	for (int i = 0; i < flock.size(); i++)
 	{
-		//flock[i]->Update(deltaTime, swarm, targetPos);
+		flock[i]->Update(deltaTime, flock);
 	}
 }
 
@@ -25,7 +25,7 @@ void FactoryFlock::Draw(sf::RenderWindow* window)
 	//Draw Flock
 	for (int i = 0; i < flock.size(); i++)
 	{
-		//flock[i]->Draw(window);
+		flock[i]->Draw(window);
 	}
 }
 
@@ -42,7 +42,7 @@ std::vector<sf::Rect<float>> FactoryFlock::GetFactoryBounds()
 	{
 		for (int i = 0; i < flock.size(); i++)
 		{
-			//flockBounds.push_back(flock[i]->GetBounds());
+			flockBounds.push_back(flock[i]->GetBounds());
 		}
 	}
 
