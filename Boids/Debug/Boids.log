@@ -1,13 +1,31 @@
-﻿Build started 15/01/2016 19:22:18.
+﻿Build started 16/01/2016 16:29:38.
      1>Project "C:\Subjects\Artificial Intelligence For Games\Project\Asteroid Wars\Boids\Boids.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Boids.vcxproj, Swarm.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML-2.3.2\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Factory.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML-2.3.2\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Factory.cpp main.cpp
+         main.cpp
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(65): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(67): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(67): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(70): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(70): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(73): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(73): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(110): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(112): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(132): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
          Factory.cpp
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\factory.cpp(41): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\factory.cpp(42): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\factory.cpp(43): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\factory.cpp(92): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\factory.cpp(15): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\factory.cpp(16): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\factory.cpp(17): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\factory.cpp(19): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\factory.cpp(56): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\factory.cpp(96): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\factory.cpp(133): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\factory.cpp(167): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\factory.cpp(180): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\factory.cpp(213): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Subjects\Artificial Intelligence For Games\Project\Asteroid Wars\Debug\Flock.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\SFML-2.3.2\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Subjects\Artificial Intelligence For Games\Project\Asteroid Wars\Debug\Flock.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Subjects\Artificial Intelligence For Games\Project\Asteroid Wars\Debug\Flock.lib" /MACHINE:X86 Debug\Boid.obj
          Debug\Bullet.obj
@@ -27,4 +45,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.75
+Time Elapsed 00:00:01.32

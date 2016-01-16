@@ -4,7 +4,7 @@
 #include "Bullet.h"
 #include "Spaceship.h"
 #include "Playership.h"
-#define MaxSpeed 150
+#define MaxSpeed 450
 
 Playership::Playership(sf::Vector2f pos, sf::Vector2f dir, sf::FloatRect bounds)
 	: Spaceship(pos, dir, bounds)
@@ -75,7 +75,15 @@ void Playership::Update(float deltaTime)
 
 	m_sprite.setRotation(m_rotation);
 	m_direction = sf::Vector2f(cos(m_rotation*PI / 180), sin(m_rotation*PI / 180));
-	
+
+	if (m_speed > 0)
+	{
+		m_speed -= 50 * deltaTime;
+	}
+	else if (m_speed < 0)
+	{
+		m_speed += 50 * deltaTime;
+	}
 	Spaceship::Update(deltaTime);
 }
 

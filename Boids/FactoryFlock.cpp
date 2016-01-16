@@ -7,7 +7,8 @@ FactoryFlock::FactoryFlock(int amount, sf::FloatRect bounds)
 	{
 		float randX = std::rand() % 5000;
 		float randY = std::rand() % 3500;
-		flock.push_back(new Factory(sf::Vector2f(randX, randY), sf::Vector2f(0, 0), bounds));
+		float randAngle = std::rand() % 360;
+		flock.push_back(new Factory(sf::Vector2f(randX, randY), sf::Vector2f(cos(randAngle), sin(randAngle)), bounds));
 	}
 }
 
@@ -17,6 +18,21 @@ void FactoryFlock::Update(float deltaTime)
 	for (int i = 0; i < flock.size(); i++)
 	{
 		flock[i]->Update(deltaTime, flock);
+
+		if (flock[i]->GetState() == Factory::State::Wandering)
+		{
+			Pvector location(flock[i]->GetPosition().x, flock[i]->GetPosition().y);
+			for (int j = 0; j < flock.size(); j++)
+			{
+				Pvector otherLocation(flock[j]->GetPosition().x, flock[j]->GetPosition().y);
+				float distance = location.distance(otherLocation);
+				if (distance > 0 && distance < 100)
+				{
+					flock[i]->SetState(Factory::State::Flocking);
+					flock[j]->SetState(Factory::State::Flocking);
+				}
+			}
+		}
 	}
 }
 
