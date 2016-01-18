@@ -43,6 +43,7 @@ void ClampCamera(sf::View* view, float windowWidth, float windowHeight)
 
 int main()
 {
+	srand(time(NULL));	//Initialise the random seed
 	float boidsSize = 3;
 	string action = "flock";
 
@@ -67,7 +68,7 @@ int main()
 	Playership player(sf::Vector2f(window_width/2, window_height/2), sf::Vector2f(1, 0), sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
 
 	//Create swarm
-	Swarm swarm(0, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
+	Swarm swarm(50, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
 
 	//Create Factories
 	FactoryFlock factoryFlock(10, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
@@ -102,7 +103,7 @@ int main()
 
 		player.Update(deltaTime);
 		swarm.Update(deltaTime, Pvector(player.GetPosition().x, player.GetPosition().y));
-		factoryFlock.Update(deltaTime);
+		factoryFlock.Update(deltaTime, Pvector(player.GetPosition().x, player.GetPosition().y));
 
 		//Collision between bullets and swarm
 		std::vector<sf::FloatRect> bulletBounds = player.GetBulletBounds();

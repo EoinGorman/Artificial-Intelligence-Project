@@ -12,7 +12,7 @@ public:
 	};
 
 	Factory(sf::Vector2f pos, sf::Vector2f dir, sf::FloatRect bounds);
-	void Update(float deltaTime, std::vector<Factory*> flock);
+	void Update(float deltaTime, std::vector<Factory*> flock, Pvector playerPos);
 	State GetState();
 	void SetState(State newState);
 	sf::Rect<float> GetBounds();
@@ -22,10 +22,10 @@ public:
 private:
 	//Functions
 	void Move(float deltaTime);
-	void Wander(float deltaTime);
-	void Flock(std::vector<Factory*> flock, float deltaTime);
+	void Wander(float deltaTime, Pvector playerPos);
+	void Flock(std::vector<Factory*> flock, float deltaTime, Pvector playerPos);
 	// Three Laws that boids follow
-	Pvector Separation(vector<Factory*> flock);
+	Pvector Separation(vector<Factory*> flock, Pvector playerPos);
 	Pvector Alignment(vector<Factory*> flock);
 	Pvector Cohesion(vector<Factory*> flock);
 	Pvector Seek(Pvector v);

@@ -9,6 +9,7 @@ Factory::Factory(sf::Vector2f pos, sf::Vector2f dir, sf::FloatRect bounds)
 	wanderTimer = 0;
 	m_speed = 5;
 	currentState = State::Wandering;
+	wanderTimer = wanderTime;
 
 	m_texture.loadFromFile("../Images/Spaceship_3.png");
 	m_sprite.setTexture(m_texture, true);
@@ -21,15 +22,15 @@ Factory::Factory(sf::Vector2f pos, sf::Vector2f dir, sf::FloatRect bounds)
 	m_sprite.setRotation(atan2(m_direction.y, m_direction.x));
 }
 
-void Factory::Update(float deltaTime, std::vector<Factory*> flock)
+void Factory::Update(float deltaTime, std::vector<Factory*> flock, Pvector playerPos)
 {
 	switch (currentState)
 	{
 	case Wandering:
-		Wander(deltaTime);
+		Wander(deltaTime, playerPos);
 		break;
 	case Flocking:
-		Flock(flock, deltaTime);
+		Flock(flock, deltaTime, playerPos);
 		break;
 	}
 
@@ -67,9 +68,10 @@ void Factory::Move(float deltaTime)
 }
 
 
-void Factory::Flock(std::vector<Factory*> flock, float deltaTime)
+void Factory::Flock(std::vector<Factory*> flock, float deltaTime, Pvector playerPos)
 {
-	Pvector sep = Separation(flock);
+	m_speed = 100;
+	Pvector sep = Separation(flock, playerPos);
 	Pvector ali = Alignment(flock);
 	Pvector coh = Cohesion(flock);
 	// Arbitrarily weight these forces
@@ -84,7 +86,7 @@ void Factory::Flock(std::vector<Factory*> flock, float deltaTime)
 }
 
 // Three Laws that boids follow
-Pvector Factory::Separation(vector<Factory*> flock)
+Pvector Factory::Separation(vector<Factory*> flock, Pvector playerPos)
 {
 	// Distance of field of vision for separation between boids
 	float desiredseparation = 50;
@@ -109,6 +111,17 @@ Pvector Factory::Separation(vector<Factory*> flock)
 			count++;
 		}
 	}
+
+	if (location.distance(playerPos) < 200)
+	{
+		Pvector diff(0, 0);
+		diff = diff.subTwoVector(location, playerPos);
+		diff.normalize();
+		diff.mulScalar(3);      // Weight
+		steer.addVector(diff);
+		count++;
+	}
+
 	// Adds average difference of location to acceleration
 	if (count > 0)
 		steer.divScalar((float)count);
@@ -192,7 +205,7 @@ Pvector Factory::Seek(Pvector v)
 	desired.subVector(v);  // A vector pointing from the location to the target
 						   // Normalize desired and scale to maximum speed
 	desired.normalize();
-	desired.mulScalar(MaxSpeed);	//Replace with maxSpeed??
+	desired.mulScalar(MaxSpeed);	
 
 	// Steering = Desired minus Velocity
 	acceleration.subTwoVector(desired, velocity);
@@ -200,7 +213,7 @@ Pvector Factory::Seek(Pvector v)
 	return acceleration;
 }
 
-void Factory::Wander(float deltaTime)
+void Factory::Wander(float deltaTime, Pvector playerPos)
 {
 	m_speed = 250;
 	wanderTimer += deltaTime;
@@ -210,8 +223,36 @@ void Factory::Wander(float deltaTime)
 		wanderTimer = 0;
 
 		m_direction = sf::Vector2f(((std::rand() % 200) - 100) / 100.0f, ((std::rand() % 200) - 100) / 100.0f);
+		velocity = Pvector(m_direction.x, m_direction.y);
 		m_sprite.setRotation(atan2(m_direction.y, m_direction.x) * 180 / PI);
 	}
+
+	Pvector location = Pvector(m_position.x, m_position.y);
+	if (location.distance(playerPos) < 200)
+	{
+		Pvector diff(0, 0);
+		diff = diff.subTwoVector(location, playerPos);
+		diff.normalize();
+		diff.mulScalar(0.2f);      // Weight
+		m_direction += sf::Vector2f(diff.x, diff.y);
+		//normalise direction
+		float mag = sqrt(m_direction.x * m_direction.x + m_direction.y * m_direction.y); //Magnitude of vector formula
+		m_direction /= mag;
+
+		velocity = Pvector(m_direction.x, m_direction.y);
+		m_sprite.setRotation(atan2(m_direction.y, m_direction.x) * 180 / PI);
+	}
+
+	/*
+	if (steer.magnitude() > 0)
+	{
+		// Steering = Desired - Velocity
+		steer.normalize();
+		steer.mulScalar(MaxSpeed);	//max speed
+		steer.subVector(velocity);
+		steer.limit(MaxForce);
+	}
+	*/
 	Spaceship::Move(deltaTime);
 }
 

@@ -8,7 +8,7 @@ class FactoryFlock
 {
 public:
 	FactoryFlock(int amount, sf::FloatRect bounds);
-	void Update(float deltaTime);
+	void Update(float deltaTime, Pvector playerPos);
 	void Draw(sf::RenderWindow* window);
 
 	void DestroyShip(int index);
