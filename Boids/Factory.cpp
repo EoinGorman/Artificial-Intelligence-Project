@@ -1,4 +1,6 @@
 #include "Factory.h"
+#define ReloadTime 3
+#define MissileRange 400
 #define MaxSpeed 3.5
 #define MaxForce 0.5
 
@@ -7,6 +9,7 @@ Factory::Factory(sf::Vector2f pos, sf::Vector2f dir, sf::FloatRect bounds)
 {
 	wanderTime = (std::rand() % 5000) / 1000.0f;
 	wanderTimer = 0;
+    reloadTimer = ReloadTime;
 	m_speed = 5;
 	currentState = State::Wandering;
 	wanderTimer = wanderTime;
@@ -34,7 +37,31 @@ void Factory::Update(float deltaTime, std::vector<Factory*> flock, Pvector playe
 		break;
 	}
 
+    CheckForShoot(deltaTime, playerPos);
 	WrapAroundScreen();
+
+    for (int i = 0; i < missiles.size(); i++)
+    {
+        if (missiles.at(i)->MarkedForDeletion())
+        {
+            delete missiles.at(i);
+            missiles.erase(missiles.begin() + i);
+            break;
+        }
+        else
+        {
+            missiles.at(i)->Update(deltaTime, sf::Vector2f(playerPos.x, playerPos.y));
+        }
+    }
+}
+
+void Factory::Draw(sf::RenderWindow* window)
+{
+    window->draw(m_sprite);
+    for (int i = 0; i < missiles.size(); i++)
+    {
+        missiles.at(i)->Draw(window);
+    }
 }
 
 Factory::State Factory::GetState()
@@ -265,4 +292,24 @@ float Factory::Angle()
 void Factory::ApplyForce(Pvector force)
 {
 	acceleration.addVector(force);
+}
+
+
+void Factory::CheckForShoot(float deltaTime, Pvector playerPos)
+{
+    reloadTimer += deltaTime;
+    if (reloadTimer >= ReloadTime)
+    {
+        Pvector location = Pvector(m_position.x, m_position.y);
+        if (playerPos.distance(location) <= MissileRange)
+        {
+            Shoot(playerPos);
+        }
+    }
+}
+
+void Factory::Shoot(Pvector playerPos)
+{
+    reloadTimer = 0;
+    missiles.push_back(new InterceptorMissile(m_position, Angle(), m_bounds, sf::Vector2f(playerPos.x, playerPos.y)));
 }

@@ -68,10 +68,10 @@ int main()
 	Playership player(sf::Vector2f(window_width/2, window_height/2), sf::Vector2f(1, 0), sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
 
 	//Create swarm
-	Swarm swarm(50, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
+	Swarm swarm(0, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
 
 	//Create Factories
-	FactoryFlock factoryFlock(10, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
+	FactoryFlock factoryFlock(5, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
 
 	while (window.isOpen())
 	{

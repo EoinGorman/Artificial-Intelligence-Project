@@ -1,5 +1,6 @@
 #pragma once
 #include "Spaceship.h"
+#include "InterceptorMissile.h"
 
 class Factory : public Spaceship
 {
@@ -13,6 +14,7 @@ public:
 
 	Factory(sf::Vector2f pos, sf::Vector2f dir, sf::FloatRect bounds);
 	void Update(float deltaTime, std::vector<Factory*> flock, Pvector playerPos);
+    void Factory::Draw(sf::RenderWindow* window);
 	State GetState();
 	void SetState(State newState);
 	sf::Rect<float> GetBounds();
@@ -21,6 +23,8 @@ public:
 
 private:
 	//Functions
+
+    void CheckForShoot(float deltaTime, Pvector playerPos);
 	void Move(float deltaTime);
 	void Wander(float deltaTime, Pvector playerPos);
 	void Flock(std::vector<Factory*> flock, float deltaTime, Pvector playerPos);
@@ -31,8 +35,11 @@ private:
 	Pvector Seek(Pvector v);
 	float Angle();
 	void ApplyForce(Pvector force);
+    void Factory::Shoot(Pvector playerPos);
 
 	//Variables
+    std::vector<InterceptorMissile*> missiles;
+    float reloadTimer;
 	State currentState;
 	Pvector velocity;
 	Pvector acceleration;
