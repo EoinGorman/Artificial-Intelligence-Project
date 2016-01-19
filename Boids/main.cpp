@@ -68,10 +68,10 @@ int main()
 	Playership player(sf::Vector2f(window_width/2, window_height/2), sf::Vector2f(1, 0), sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
 
 	//Create swarm
-	Swarm swarm(0, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
+	Swarm swarm(10, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
 
 	//Create Factories
-	FactoryFlock factoryFlock(5, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
+	FactoryFlock factoryFlock(10, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
 
 	while (window.isOpen())
 	{
@@ -98,29 +98,76 @@ int main()
 
 		//UPDATE HERE!!! 
 
+
+        //Get all bounding boxes
+        std::vector<sf::FloatRect> bulletBounds = player.GetBulletBounds();
+        std::vector<sf::FloatRect> swarmBounds = swarm.GetSwarmBounds();
+        std::vector<sf::FloatRect> factoryBounds = factoryFlock.GetFactoryBounds();
+        sf::FloatRect playerBound = player.GetBounds();
+
+        //Calculate Delta Time
 		float deltaTime = deltaClock.getElapsedTime().asSeconds();
 		deltaClock.restart();
 
+        //Call Updates
 		player.Update(deltaTime);
 		swarm.Update(deltaTime, Pvector(player.GetPosition().x, player.GetPosition().y));
-		factoryFlock.Update(deltaTime, Pvector(player.GetPosition().x, player.GetPosition().y));
+		factoryFlock.Update(deltaTime, Pvector(player.GetPosition().x, player.GetPosition().y), &player);
 
-		//Collision between bullets and swarm
-		std::vector<sf::FloatRect> bulletBounds = player.GetBulletBounds();
-		std::vector<sf::FloatRect> swarmBounds = swarm.GetSwarmBounds();
-		for (int i = 0; i < bulletBounds.size(); i++)
-		{
-			for (int j = 0; j < swarmBounds.size(); j++)
-			{
-				if (bulletBounds[i].intersects(swarmBounds[j]))
-				{
-					player.DestroyBullet(i);
-					swarm.DestroyShip(j);
-					goto here;
-				}
-			}
-		}
-		here:
+		//COLLISION
+
+        //Collision between player and swarm
+        for (int i = 0; i < swarmBounds.size(); i++)
+        {
+            if (playerBound.intersects(swarmBounds[i]))
+            {
+                //Damage player
+                swarm.DestroyShip(i);
+                goto endPLayerSwamrCol;
+            }
+        }
+    endPLayerSwamrCol:
+
+        //Collision with player bullets
+        for (int i = 0; i < bulletBounds.size(); i++)
+        {
+            //Bullets + Factories
+            for (int j = 0; j < factoryBounds.size(); j++)
+            {
+                if (bulletBounds[i].intersects(factoryBounds[j]))
+                {
+                    player.DestroyBullet(i);
+                    factoryFlock.DamageShip(j);  //Damage Factory
+                    goto endBulletFactoryCol;
+                }
+            }
+
+            //Bullets + Swarm
+            for (int j = 0; j < swarmBounds.size(); j++)
+            {
+                if (bulletBounds[i].intersects(swarmBounds[j]))
+                {
+                    player.DestroyBullet(i);
+                    swarm.DestroyShip(j);
+                    goto endBulletSwarmCol;
+                }
+            }
+        }
+    endBulletFactoryCol:
+    endBulletSwarmCol:
+
+        //Factories and Player
+        for (int i = 0; i < factoryBounds.size(); i++)
+        {
+            if (playerBound.intersects(factoryBounds[i]))
+            {
+                //Damage player
+                factoryFlock.DestroyShip(i);
+                goto endPlayerFactoryCol;
+            }
+        }
+    endPlayerFactoryCol:
+
 		InputManager::GetInstance()->UpdateState();
 
 		//Clears previous frames of visualization to not have clutter. (And simulate animation)

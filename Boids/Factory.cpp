@@ -3,6 +3,7 @@
 #define MissileRange 400
 #define MaxSpeed 3.5
 #define MaxForce 0.5
+#define Health 4
 
 Factory::Factory(sf::Vector2f pos, sf::Vector2f dir, sf::FloatRect bounds)
 	: Spaceship(pos, dir, bounds)
@@ -32,7 +33,7 @@ void Factory::Update(float deltaTime, std::vector<Factory*> flock, Pvector playe
 	case Wandering:
 		Wander(deltaTime, playerPos);
 		break;
-	case Flocking:
+	case Flocking: 
 		Flock(flock, deltaTime, playerPos);
 		break;
 	}
@@ -71,11 +72,6 @@ Factory::State Factory::GetState()
 void Factory::SetState(State newState)
 {
 	currentState = newState;
-}
-
-sf::Rect<float> Factory::GetBounds()
-{
-	return m_sprite.getGlobalBounds();
 }
 
 void Factory::Move(float deltaTime)
@@ -312,4 +308,32 @@ void Factory::Shoot(Pvector playerPos)
 {
     reloadTimer = 0;
     missiles.push_back(new InterceptorMissile(m_position, Angle(), m_bounds, sf::Vector2f(playerPos.x, playerPos.y)));
+}
+
+bool Factory::DamageShip()
+{
+    hitsTaken++;
+    if (hitsTaken >= Health)
+        return true;
+    return false;
+}
+
+
+std::vector<sf::FloatRect> Factory::GetMissileBounds()
+{
+    std::vector<sf::Rect<float>> missileBounds;
+    if (missiles.size() > 0)
+    {
+        for (int i = 0; i < missiles.size(); i++)
+        {
+            missileBounds.push_back(missiles[i]->GetBounds());
+        }
+    }
+    return missileBounds;
+}
+
+void Factory::DestroyMissile(int index)
+{
+    delete missiles.at(index);
+    missiles.erase(missiles.begin() + index);
 }

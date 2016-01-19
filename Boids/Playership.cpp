@@ -24,7 +24,7 @@ void Playership::Update(float deltaTime)
 		
 	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::Space))
 	{
-		m_bullets.push_back(new Bullet(m_position, m_rotation, m_bounds));
+		m_bullets.push_back(new Bullet(m_position, m_rotation, m_bounds, abs(m_speed)));
 	}
 
 	if (InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::Left))

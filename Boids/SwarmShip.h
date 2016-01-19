@@ -21,7 +21,6 @@ public:
 	void Update(float deltaTime, vector<SwarmShip*> otherShips, Pvector targetPos);
 	State GetState();
 	void SetState(State newState);
-	sf::Rect<float> GetBounds();
 
 	//Variables
 

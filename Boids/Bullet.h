@@ -5,7 +5,7 @@ class Bullet
 {
 public:
 	Bullet();
-	Bullet(sf::Vector2f pos, float angle, sf::FloatRect bounds);
+	Bullet(sf::Vector2f pos, float angle, sf::FloatRect bounds, float speed);
 
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow* window);
