@@ -50,7 +50,7 @@ void Predator::Update(float deltaTime, std::vector<Predator*> flock, Pvector pla
 		}
 		else
 		{
-			missiles.at(i)->Update(deltaTime, sf::Vector2f(playerPos.x, playerPos.y));
+			missiles.at(i)->Update(deltaTime);
 		}
 	}
 }
@@ -331,9 +331,32 @@ void Predator::CheckForShoot(float deltaTime, Pvector playerPos)
 		}
 	}
 }
-
+float Predator::shootThePlayer(Pvector playerPos)
+{
+	float deltaX = playerPos.x - m_position.x;
+	float deltaY = playerPos.y - m_position.y;
+	float facing = (float)(atan2(deltaY, deltaX) * 180 / PI);
+	return facing;
+}
 void Predator::Shoot(Pvector playerPos)
 {
 	reloadTimer = 0;
-	missiles.push_back(new InterceptorMissile(m_position, Angle(), m_bounds, sf::Vector2f(playerPos.x, playerPos.y)));
+	missiles.push_back(new Bullet(m_position, shootThePlayer(playerPos), m_bounds, 5));
+}
+std::vector<sf::FloatRect> Predator::GetBulletBounds()
+{
+	std::vector<sf::Rect<float>> bulletBounds;
+	if (missiles.size() > 0)
+	{
+		for (int i = 0; i < missiles.size(); i++)
+		{
+			bulletBounds.push_back(missiles[i]->GetBounds());
+		}
+	}
+	return bulletBounds;
+}
+void Predator::DestroyBullet(int index)
+{
+	delete missiles.at(index);
+	missiles.erase(missiles.begin() + index);
 }

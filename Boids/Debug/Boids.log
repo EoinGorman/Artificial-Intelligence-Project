@@ -1,4 +1,4 @@
-﻿Build started 20/01/2016 12:59:32.
+﻿Build started 20/01/2016 20:02:04.
      1>Project "C:\Users\Decland\Desktop\AIProject\Artificial-Intelligence-Project\Boids\Boids.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Boids.vcxproj, Swarm.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
@@ -14,12 +14,14 @@
      1>c:\users\decland\desktop\aiproject\artificial-intelligence-project\boids\main.cpp(75): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
      1>c:\users\decland\desktop\aiproject\artificial-intelligence-project\boids\main.cpp(78): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
      1>c:\users\decland\desktop\aiproject\artificial-intelligence-project\boids\main.cpp(78): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
-     1>c:\users\decland\desktop\aiproject\artificial-intelligence-project\boids\main.cpp(125): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\decland\desktop\aiproject\artificial-intelligence-project\boids\main.cpp(137): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\decland\desktop\aiproject\artificial-intelligence-project\boids\main.cpp(140): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\decland\desktop\aiproject\artificial-intelligence-project\boids\main.cpp(126): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\decland\desktop\aiproject\artificial-intelligence-project\boids\main.cpp(138): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\decland\desktop\aiproject\artificial-intelligence-project\boids\main.cpp(141): warning C4018: '<' : signed/unsigned mismatch
      1>c:\users\decland\desktop\aiproject\artificial-intelligence-project\boids\main.cpp(151): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\decland\desktop\aiproject\artificial-intelligence-project\boids\main.cpp(165): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\decland\desktop\aiproject\artificial-intelligence-project\boids\main.cpp(185): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\decland\desktop\aiproject\artificial-intelligence-project\boids\main.cpp(161): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\decland\desktop\aiproject\artificial-intelligence-project\boids\main.cpp(175): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\decland\desktop\aiproject\artificial-intelligence-project\boids\main.cpp(186): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\decland\desktop\aiproject\artificial-intelligence-project\boids\main.cpp(207): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Decland\Desktop\AIProject\Artificial-Intelligence-Project\Debug\Flock.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\SFML-2.3.2\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Decland\Desktop\AIProject\Artificial-Intelligence-Project\Debug\Flock.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Decland\Desktop\AIProject\Artificial-Intelligence-Project\Debug\Flock.lib" /MACHINE:X86 Debug\Boid.obj
          Debug\Bullet.obj
@@ -42,4 +44,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.83
+Time Elapsed 00:00:00.93

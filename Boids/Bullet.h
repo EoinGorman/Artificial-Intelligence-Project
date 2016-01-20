@@ -12,11 +12,13 @@ public:
 	bool OutOfBounds();
 	sf::Vector2f GetPosition();
 	sf::Rect<float> GetBounds();
+	void CheckBounds();
+	bool MarkedForDeletion();
 
 private:
 	//Functions
 	void Move(float deltaTime);
-	void CheckBounds();
+	
 
 	//Variables
 	bool offScreen;

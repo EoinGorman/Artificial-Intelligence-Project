@@ -71,6 +71,11 @@ void Bullet::Move(float deltaTime)
 	m_sprite.setPosition(m_position);
 }
 
+bool Bullet::MarkedForDeletion()
+{
+	return offScreen;
+}
+
 void Bullet::CheckBounds()
 {
 	//X axis

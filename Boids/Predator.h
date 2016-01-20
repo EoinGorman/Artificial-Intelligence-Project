@@ -1,6 +1,6 @@
 #pragma once
 #include "Spaceship.h"
-#include "InterceptorMissile.h"
+#include "Bullet.h"
 
 class Predator : public Spaceship
 {
@@ -17,7 +17,8 @@ public:
 	void Predator::Draw(sf::RenderWindow* window);
 	State GetState();
 	void SetState(State newState);
-
+	std::vector <sf::FloatRect> GetBulletBounds();
+	void DestroyBullet(int index);
 	//Variables
 
 private:
@@ -35,9 +36,9 @@ private:
 	float Angle();
 	void ApplyForce(Pvector force);
 	void Predator::Shoot(Pvector playerPos);
-
+	float shootThePlayer(Pvector playerPos);
 	//Variables
-	std::vector<InterceptorMissile*> missiles;
+	std::vector<Bullet*> missiles;
 	float reloadTimer;
 	State currentState;
 	Pvector velocity;
@@ -45,4 +46,5 @@ private:
 	float maxForce;
 	float wanderTimer;
 	float wanderTime;
+
 };

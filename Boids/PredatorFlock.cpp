@@ -11,7 +11,7 @@ PredatorFlock::PredatorFlock(int amount, sf::FloatRect bounds)
 	}
 }
 
-void PredatorFlock::Update(float deltaTime, Pvector playerPos)
+void PredatorFlock::Update(float deltaTime, Pvector playerPos, Playership* player)
 {
 	//Update Flock
 	for (int i = 0; i < flock.size(); i++)
@@ -30,9 +30,21 @@ void PredatorFlock::Update(float deltaTime, Pvector playerPos)
 				}
 			}
 		}
-
+		std::vector<sf::FloatRect> bulletBounds = flock[i]->GetBulletBounds();
+		for (int j = 0; j < bulletBounds.size(); j++)
+		{
+			if (player->GetBounds().intersects(bulletBounds[j]))
+			{
+				//Destroy Missile
+				flock[i]->DestroyBullet(j);
+				//Damage Player
+				break;
+			}
+		}
 		flock[i]->Update(deltaTime, flock, playerPos);
 	}
+	//Collision with interceptor missiles
+	
 }
 
 void PredatorFlock::Draw(sf::RenderWindow* window)
