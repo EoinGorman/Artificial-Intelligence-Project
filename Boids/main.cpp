@@ -10,6 +10,7 @@
 #include "Pvector.h"
 #include "Swarm.h"
 #include "FactoryFlock.h"
+#include "PredatorFlock.h"
 
 using namespace std;
 
@@ -80,10 +81,13 @@ int main()
 	Playership player(sf::Vector2f(window_width/2, window_height/2), sf::Vector2f(1, 0), sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
 
 	//Create swarm
-	Swarm swarm(10, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
+	Swarm swarm(40, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
 
 	//Create Factories
-	FactoryFlock factoryFlock(10, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
+	FactoryFlock factoryFlock(5, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
+
+	//Create Predators
+	PredatorFlock predatorFlock(10, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
 
 	while (window.isOpen())
 	{
@@ -115,6 +119,7 @@ int main()
         std::vector<sf::FloatRect> bulletBounds = player.GetBulletBounds();
         std::vector<sf::FloatRect> swarmBounds = swarm.GetSwarmBounds();
         std::vector<sf::FloatRect> factoryBounds = factoryFlock.GetFactoryBounds();
+		std::vector<sf::FloatRect> predatorBounds = predatorFlock.GetPredatorBounds();
         sf::FloatRect playerBound = player.GetBounds();
 
         //Calculate Delta Time
@@ -125,6 +130,7 @@ int main()
 		player.Update(deltaTime);
 		swarm.Update(deltaTime, Pvector(player.GetPosition().x, player.GetPosition().y));
 		factoryFlock.Update(deltaTime, Pvector(player.GetPosition().x, player.GetPosition().y), &player);
+		predatorFlock.Update(deltaTime, Pvector(player.GetPosition().x, player.GetPosition().y), &player);
 
 		//COLLISION
 
@@ -153,7 +159,16 @@ int main()
                     goto endBulletFactoryCol;
                 }
             }
-
+			//Bullets + Predators
+			for (int j = 0; j < predatorBounds.size(); j++)
+			{
+				if (bulletBounds[i].intersects(predatorBounds[j]))
+				{
+					player.DestroyBullet(i);
+					predatorFlock.DestroyShip(j);  //Destroy Pred
+					goto endBulletPredatorCol;
+				}
+			}
             //Bullets + Swarm
             for (int j = 0; j < swarmBounds.size(); j++)
             {
@@ -167,7 +182,18 @@ int main()
         }
     endBulletFactoryCol:
     endBulletSwarmCol:
-
+	endBulletPredatorCol:
+		//Predators and Player
+		for (int i = 0; i < predatorBounds.size(); i++)
+		{
+			if (playerBound.intersects(predatorBounds[i]))
+			{
+				//Damage player
+				predatorFlock.DestroyShip(i);
+				goto endPlayerPredatorCol;
+			}
+		}
+	endPlayerPredatorCol:
         //Factories and Player
         for (int i = 0; i < factoryBounds.size(); i++)
         {
@@ -178,7 +204,8 @@ int main()
                 goto endPlayerFactoryCol;
             }
         }
-    endPlayerFactoryCol:
+	endPlayerFactoryCol:
+	
 
 		InputManager::GetInstance()->UpdateState();
 
@@ -198,6 +225,8 @@ int main()
 		player.Draw(&window);
 		swarm.Draw(&window);
 		factoryFlock.Draw(&window);
+		predatorFlock.Draw(&window);
+		
 
         //Set to draw in radar view
         window.setView(radar);
@@ -205,6 +234,7 @@ int main()
         swarm.DrawRadarImage(&window);
         player.DrawRadarImage(&window);
         factoryFlock.DrawRadarImage(&window);
+        predatorFlock.DrawRadarImage(&window);
 
 		//Updates the window with current values of any data that was modified.
 		window.display();
