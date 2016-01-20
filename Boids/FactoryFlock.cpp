@@ -11,7 +11,7 @@ FactoryFlock::FactoryFlock(int amount, sf::FloatRect bounds)
 	}
 }
 
-void FactoryFlock::Update(float deltaTime, Pvector playerPos)
+void FactoryFlock::Update(float deltaTime, Pvector playerPos, Playership* player)
 {
 	//Update Flock
 	for (int i = 0; i < flock.size(); i++)
@@ -32,6 +32,20 @@ void FactoryFlock::Update(float deltaTime, Pvector playerPos)
 		}
 
 		flock[i]->Update(deltaTime, flock, playerPos);
+
+        //Collision with interceptor missiles
+        std::vector<sf::FloatRect> interceptorMissileBounds = flock[i]->GetMissileBounds();
+        for (int j = 0; j < interceptorMissileBounds.size(); j++)
+        {
+            if (player->GetBounds().intersects(interceptorMissileBounds[j]))
+            {
+                //Destroy Missile
+                flock[i]->DestroyMissile(j);
+                //Damage Player
+                break;
+            }
+        }
+
 	}
 }
 
@@ -62,4 +76,28 @@ std::vector<sf::Rect<float>> FactoryFlock::GetFactoryBounds()
 	}
 
 	return flockBounds;
+}
+
+
+void FactoryFlock::DamageShip(int index)
+{
+    if (flock[index]->DamageShip())
+        DestroyShip(index);
+}
+
+std::vector<sf::Rect<float>> FactoryFlock::GetMissileBounds()
+{
+    std::vector<sf::Rect<float>> missileBounds;
+    if (flock.size() > 0)
+    {
+        for (int i = 0; i < flock.size(); i++)
+        {
+            std::vector<sf::Rect<float>> tempBounds = flock[i]->GetMissileBounds();
+            for (int j = 0; j < tempBounds.size(); j++)
+            {
+                missileBounds.push_back(tempBounds[j]);
+            }
+        }
+    }
+    return missileBounds;
 }

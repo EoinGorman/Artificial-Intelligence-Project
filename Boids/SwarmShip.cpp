@@ -145,9 +145,3 @@ void SwarmShip::ApplyForce(Pvector force)
 {
 	acceleration.addVector(force);
 }
-
-
-sf::Rect<float> SwarmShip::GetBounds()
-{
-	return m_sprite.getGlobalBounds();
-}

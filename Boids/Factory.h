@@ -17,7 +17,9 @@ public:
     void Factory::Draw(sf::RenderWindow* window);
 	State GetState();
 	void SetState(State newState);
-	sf::Rect<float> GetBounds();
+    bool DamageShip();
+    void DestroyMissile(int index);
+    std::vector<sf::FloatRect> GetMissileBounds();
 
 	//Variables
 
@@ -38,6 +40,7 @@ private:
     void Factory::Shoot(Pvector playerPos);
 
 	//Variables
+    int hitsTaken;
     std::vector<InterceptorMissile*> missiles;
     float reloadTimer;
 	State currentState;

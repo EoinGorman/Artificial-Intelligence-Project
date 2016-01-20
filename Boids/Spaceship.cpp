@@ -79,3 +79,8 @@ void Spaceship::WrapAroundScreen()
 		m_position.y = m_bounds.top - m_height / 2;
 	}
 }
+
+sf::Rect<float> Spaceship::GetBounds()
+{
+    return m_sprite.getGlobalBounds();
+}

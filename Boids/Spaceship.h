@@ -16,6 +16,7 @@ public:
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow* window);
 	sf::Vector2f GetPosition();
+    sf::Rect<float> Spaceship::GetBounds();
 	//Variables
 
 protected:

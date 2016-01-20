@@ -17,7 +17,6 @@ public:
 	void Predator::Draw(sf::RenderWindow* window);
 	State GetState();
 	void SetState(State newState);
-	sf::Rect<float> GetBounds();
 
 	//Variables
 

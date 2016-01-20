@@ -73,11 +73,6 @@ void Predator::SetState(State newState)
 	currentState = newState;
 }
 
-sf::Rect<float> Predator::GetBounds()
-{
-	return m_sprite.getGlobalBounds();
-}
-
 void Predator::Move(float deltaTime)
 {
 	//To make the slow down not as abrupt

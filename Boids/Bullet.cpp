@@ -2,7 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "Bullet.h"
 #define PI 3.14159265
-#define MaxSpeed 350
+#define MaxSpeed 250
 
 //PUBLIC
 Bullet::Bullet()
@@ -19,13 +19,13 @@ Bullet::Bullet()
 	offScreen = false;
 }
 
-Bullet::Bullet(sf::Vector2f pos, float angle, sf::FloatRect bounds)
+Bullet::Bullet(sf::Vector2f pos, float angle, sf::FloatRect bounds, float speed)
 {
 	m_texture.loadFromFile("../Images/Bullet.png");
 	m_sprite.setTexture(m_texture, true);
 	m_width = m_sprite.getLocalBounds().width;
 	m_height = m_sprite.getLocalBounds().height;
-	m_speed = MaxSpeed;
+	m_speed = MaxSpeed + speed;
 	m_position = pos - sf::Vector2f(m_width/2, m_height/2);
 	m_direction = m_direction = sf::Vector2f(cos(angle*PI / 180), sin(angle*PI / 180));;
 	m_position += m_direction * 10.0f;
