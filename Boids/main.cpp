@@ -59,6 +59,18 @@ int main()
 	sf::View fixed = window.getView(); // The 'fixed' view will never change
 
 	sf::View standard = fixed; // The 'standard' view will be the game world
+    sf::View radar = fixed;
+    radar.setViewport(sf::FloatRect(0.01f, 0.79f, 0.2, 0.2));
+    radar.zoom(3);
+
+    //Create radar background
+    sf::Texture texture;
+    texture.loadFromFile("../Images/RadarBackground.png");
+    sf::Sprite sprite;
+    sprite.setTexture(texture, true);
+    sprite.setOrigin(sf::Vector2f(sprite.getLocalBounds().width / 2 , sprite.getLocalBounds().height / 2));
+    sprite.setScale((window_width / sprite.getLocalBounds().width) * 3, (window_height / sprite.getLocalBounds().height) * 3);
+    sprite.setPosition(window_width / 2, window_height / 2);
 
 	sf::Clock deltaClock;
 
@@ -179,11 +191,20 @@ int main()
 		standard.setCenter(player.GetPosition());	//Set camera to center on player
 		ClampCamera(&standard, window_width, window_height);
 
+        //Set to draw in game view
 		window.setView(standard);
+
 		background.Draw(&window);
 		player.Draw(&window);
 		swarm.Draw(&window);
 		factoryFlock.Draw(&window);
+
+        //Set to draw in radar view
+        window.setView(radar);
+        window.draw(sprite);
+        swarm.DrawRadarImage(&window);
+        player.DrawRadarImage(&window);
+        factoryFlock.DrawRadarImage(&window);
 
 		//Updates the window with current values of any data that was modified.
 		window.display();

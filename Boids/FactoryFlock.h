@@ -11,6 +11,7 @@ public:
 	FactoryFlock(int amount, sf::FloatRect bounds);
 	void Update(float deltaTime, Pvector playerPos, Playership* player);
 	void Draw(sf::RenderWindow* window);
+    void DrawRadarImage(sf::RenderWindow* window);
 
     void DamageShip(int index);
 	void DestroyShip(int index);

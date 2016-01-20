@@ -4,6 +4,10 @@
 //PUBLIC
 Spaceship::Spaceship()
 {
+    m_radarTexture.loadFromFile("../Images/enemyRadarSprite.png");
+    m_radarSprite.setTexture(m_radarTexture, true);
+    m_radarSprite.setOrigin(m_radarSprite.getLocalBounds().width / 2, m_radarSprite.getLocalBounds().height / 2);
+
 	m_texture.loadFromFile("../Images/Spaceship_1.png");
 	m_sprite.setTexture(m_texture, true);
 	m_width = m_sprite.getLocalBounds().width;
@@ -17,6 +21,10 @@ Spaceship::Spaceship()
 
 Spaceship::Spaceship(sf::Vector2f pos, sf::Vector2f dir, sf::FloatRect bounds)
 {
+    m_radarTexture.loadFromFile("../Images/enemyRadarSprite.png");
+    m_radarSprite.setTexture(m_radarTexture, true);
+    m_radarSprite.setOrigin(m_radarSprite.getLocalBounds().width / 2, m_radarSprite.getLocalBounds().height / 2);
+
 	m_texture.loadFromFile("../Images/Spaceship_1.png");
 	m_sprite.setTexture(m_texture, true);
 	m_width = m_sprite.getLocalBounds().width;
@@ -37,6 +45,12 @@ void Spaceship::Update(float deltaTime)
 void Spaceship::Draw(sf::RenderWindow* window)
 {
 	window->draw(m_sprite);
+}
+
+void Spaceship::DrawRadarImage(sf::RenderWindow* window)
+{
+    m_radarSprite.setPosition(m_position);
+    window->draw(m_radarSprite);
 }
 
 sf::Vector2f Spaceship::GetPosition()

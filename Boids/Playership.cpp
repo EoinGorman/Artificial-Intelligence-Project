@@ -9,6 +9,10 @@
 Playership::Playership(sf::Vector2f pos, sf::Vector2f dir, sf::FloatRect bounds)
 	: Spaceship(pos, dir, bounds)
 {
+    m_radarTexture.loadFromFile("../Images/playerRadarSprite.png");
+    m_radarSprite.setTexture(m_radarTexture, true);
+    m_radarSprite.setOrigin(m_radarSprite.getLocalBounds().width / 2, m_radarSprite.getLocalBounds().height / 2);
+
 	m_rotation = 0;
 	m_texture.loadFromFile("../Images/Spaceship_2.png");
 	m_sprite.setTexture(m_texture, true);
@@ -96,7 +100,6 @@ void Playership::Draw(sf::RenderWindow* window)
 		m_bullets.at(i)->Draw(window);
 	}
 }
-
 
 void Playership::DestroyBullet(int index)
 {

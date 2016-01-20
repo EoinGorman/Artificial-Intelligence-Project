@@ -45,6 +45,14 @@ void Swarm::Draw(sf::RenderWindow* window)
 	}
 }
 
+void Swarm::DrawRadarImage(sf::RenderWindow* window)
+{
+    for (int i = 0; i < swarm.size(); i++)
+    {
+        swarm[i]->DrawRadarImage(window);
+    }
+}
+
 void Swarm::DestroyShip(int index)
 {
 	delete swarm[index];

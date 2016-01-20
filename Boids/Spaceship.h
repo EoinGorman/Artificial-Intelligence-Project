@@ -15,6 +15,7 @@ public:
 
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow* window);
+    void DrawRadarImage(sf::RenderWindow* window);
 	sf::Vector2f GetPosition();
     sf::Rect<float> Spaceship::GetBounds();
 	//Variables
@@ -32,6 +33,8 @@ protected:
 	sf::Vector2f m_direction;
 	sf::Sprite m_sprite;
 	sf::Texture m_texture;
+    sf::Sprite m_radarSprite;
+    sf::Texture m_radarTexture;
 	sf::FloatRect m_bounds;
 
 private:
