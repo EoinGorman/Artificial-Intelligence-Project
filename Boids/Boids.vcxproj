@@ -139,6 +139,8 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="InterceptorMissile.cpp" />
     <ClCompile Include="Playership.cpp" />
+    <ClCompile Include="Predator.cpp" />
+    <ClCompile Include="PredatorFlock.cpp" />
     <ClCompile Include="Pvector.cpp" />
     <ClCompile Include="Spaceship.cpp" />
     <ClCompile Include="Swarm.cpp" />
@@ -157,6 +159,8 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="InterceptorMissile.h" />
     <ClInclude Include="Playership.h" />
+    <ClInclude Include="Predator.h" />
+    <ClInclude Include="PredatorFlock.h" />
     <ClInclude Include="Pvector.h" />
     <ClInclude Include="Spaceship.h" />
     <ClInclude Include="Swarm.h" />

@@ -10,6 +10,7 @@
 #include "Pvector.h"
 #include "Swarm.h"
 #include "FactoryFlock.h"
+#include "PredatorFlock.h"
 
 using namespace std;
 
@@ -71,7 +72,10 @@ int main()
 	Swarm swarm(0, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
 
 	//Create Factories
-	FactoryFlock factoryFlock(5, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
+	FactoryFlock factoryFlock(0, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
+
+	//Create Predators
+	PredatorFlock predatorFlock(10, sf::FloatRect(-window_width, -window_height, window_width * 3, window_height * 3));
 
 	while (window.isOpen())
 	{
@@ -104,6 +108,7 @@ int main()
 		player.Update(deltaTime);
 		swarm.Update(deltaTime, Pvector(player.GetPosition().x, player.GetPosition().y));
 		factoryFlock.Update(deltaTime, Pvector(player.GetPosition().x, player.GetPosition().y));
+		predatorFlock.Update(deltaTime, Pvector(player.GetPosition().x, player.GetPosition().y));
 
 		//Collision between bullets and swarm
 		std::vector<sf::FloatRect> bulletBounds = player.GetBulletBounds();
@@ -137,6 +142,8 @@ int main()
 		player.Draw(&window);
 		swarm.Draw(&window);
 		factoryFlock.Draw(&window);
+		predatorFlock.Draw(&window);
+		
 
 		//Updates the window with current values of any data that was modified.
 		window.display();
