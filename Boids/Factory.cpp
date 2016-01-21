@@ -26,7 +26,7 @@ Factory::Factory(sf::Vector2f pos, sf::Vector2f dir, sf::FloatRect bounds)
 	m_sprite.setRotation(atan2(m_direction.y, m_direction.x));
 }
 
-void Factory::Update(float deltaTime, std::vector<Factory*> flock, Pvector playerPos)
+void Factory::Update(float deltaTime, std::vector<Factory*> flock, Pvector playerPos, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos)
 {
 	switch (currentState)
 	{
@@ -34,7 +34,7 @@ void Factory::Update(float deltaTime, std::vector<Factory*> flock, Pvector playe
 		Wander(deltaTime, playerPos);
 		break;
 	case Flocking: 
-		Flock(flock, deltaTime, playerPos);
+		Flock(flock, deltaTime, playerPos, asteroidSizeAndPos);
 		break;
 	}
 
@@ -91,10 +91,10 @@ void Factory::Move(float deltaTime)
 }
 
 
-void Factory::Flock(std::vector<Factory*> flock, float deltaTime, Pvector playerPos)
+void Factory::Flock(std::vector<Factory*> flock, float deltaTime, Pvector playerPos, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos)
 {
 	m_speed = 100;
-	Pvector sep = Separation(flock, playerPos);
+	Pvector sep = Separation(flock, playerPos, asteroidSizeAndPos);
 	Pvector ali = Alignment(flock);
 	Pvector coh = Cohesion(flock);
 	// Arbitrarily weight these forces
@@ -109,7 +109,7 @@ void Factory::Flock(std::vector<Factory*> flock, float deltaTime, Pvector player
 }
 
 // Three Laws that boids follow
-Pvector Factory::Separation(vector<Factory*> flock, Pvector playerPos)
+Pvector Factory::Separation(vector<Factory*> flock, Pvector playerPos, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos)
 {
 	// Distance of field of vision for separation between boids
 	float desiredseparation = 50;
@@ -134,6 +134,24 @@ Pvector Factory::Separation(vector<Factory*> flock, Pvector playerPos)
 			count++;
 		}
 	}
+
+    //For each asteroid check for seperation
+    for (int i = 0; i < asteroidSizeAndPos.size(); i++)
+    {
+        Pvector otherLocation(std::get<1>(asteroidSizeAndPos[i]));
+        // Calculate distance from current boid to boid we're looking at
+        float d = location.distance(otherLocation);
+        // If this is a fellow boid and it's too close, move away from it
+        if (d < std::get<0>(asteroidSizeAndPos[i]))
+        {
+            Pvector diff(0, 0);
+            diff = diff.subTwoVector(location, otherLocation);
+            diff.normalize();
+            diff.mulScalar(3);      // Weight
+            steer.addVector(diff);
+            count++;
+        }
+    }
 
 	if (location.distance(playerPos) < 200)
 	{

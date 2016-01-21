@@ -13,7 +13,7 @@ public:
 	};
 
 	Factory(sf::Vector2f pos, sf::Vector2f dir, sf::FloatRect bounds);
-	void Update(float deltaTime, std::vector<Factory*> flock, Pvector playerPos);
+	void Update(float deltaTime, std::vector<Factory*> flock, Pvector playerPos, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos);
     void Factory::Draw(sf::RenderWindow* window);
 	State GetState();
 	void SetState(State newState);
@@ -29,9 +29,9 @@ private:
     void CheckForShoot(float deltaTime, Pvector playerPos);
 	void Move(float deltaTime);
 	void Wander(float deltaTime, Pvector playerPos);
-	void Flock(std::vector<Factory*> flock, float deltaTime, Pvector playerPos);
+	void Flock(std::vector<Factory*> flock, float deltaTime, Pvector playerPos, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos);
 	// Three Laws that boids follow
-	Pvector Separation(vector<Factory*> flock, Pvector playerPos);
+	Pvector Separation(vector<Factory*> flock, Pvector playerPos, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos);
 	Pvector Alignment(vector<Factory*> flock);
 	Pvector Cohesion(vector<Factory*> flock);
 	Pvector Seek(Pvector v);

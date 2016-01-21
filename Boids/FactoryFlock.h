@@ -9,7 +9,7 @@ class FactoryFlock
 {
 public:
 	FactoryFlock(int amount, sf::FloatRect bounds);
-	void Update(float deltaTime, Pvector playerPos, Playership* player);
+	void Update(float deltaTime, Pvector playerPos, Playership* player, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos);
 	void Draw(sf::RenderWindow* window);
     void DrawRadarImage(sf::RenderWindow* window);
 

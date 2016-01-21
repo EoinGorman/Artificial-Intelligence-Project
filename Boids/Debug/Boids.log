@@ -1,41 +1,36 @@
-﻿Build started 20/01/2016 20:15:11.
+﻿Build started 21/01/2016 21:36:55.
      1>Project "C:\Subjects\Artificial Intelligence For Games\Project\Asteroid Wars\Boids\Boids.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Boids.vcxproj, Swarm.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML-2.3.2\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt PredatorFlock.cpp main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML-2.3.2\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(47): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(64): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(74): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(79): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(81): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(81): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(84): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(84): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(87): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(87): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(90): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(90): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(138): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(150): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(153): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(163): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(173): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(187): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(198): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(219): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
-         PredatorFlock.cpp
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\predatorflock.cpp(8): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\predatorflock.cpp(9): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\predatorflock.cpp(17): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\predatorflock.cpp(22): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\predatorflock.cpp(34): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\predatorflock.cpp(53): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\predatorflock.cpp(62): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\predatorflock.cpp(78): warning C4018: '<' : signed/unsigned mismatch
-         Generating Code...
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(48): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(65): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(75): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(80): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(82): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(82): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(85): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(85): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(88): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(88): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(91): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(91): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(94): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(94): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(146): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(158): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(161): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(171): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(181): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(195): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(206): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(217): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\subjects\artificial intelligence for games\project\asteroid wars\boids\main.cpp(239): warning C4244: 'argument' : conversion from 'const int' to 'float', possible loss of data
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Subjects\Artificial Intelligence For Games\Project\Asteroid Wars\Debug\Flock.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\SFML-2.3.2\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Subjects\Artificial Intelligence For Games\Project\Asteroid Wars\Debug\Flock.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Subjects\Artificial Intelligence For Games\Project\Asteroid Wars\Debug\Flock.lib" /MACHINE:X86 Debug\Boid.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Subjects\Artificial Intelligence For Games\Project\Asteroid Wars\Debug\Flock.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\SFML-2.3.2\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Subjects\Artificial Intelligence For Games\Project\Asteroid Wars\Debug\Flock.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Subjects\Artificial Intelligence For Games\Project\Asteroid Wars\Debug\Flock.lib" /MACHINE:X86 Debug\Asteroid.obj
+         Debug\AsteroidField.obj
+         Debug\Boid.obj
          Debug\Bullet.obj
          Debug\Factory.obj
          Debug\FactoryFlock.obj
@@ -56,4 +51,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.37
+Time Elapsed 00:00:00.94

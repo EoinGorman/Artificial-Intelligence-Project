@@ -11,7 +11,7 @@ FactoryFlock::FactoryFlock(int amount, sf::FloatRect bounds)
 	}
 }
 
-void FactoryFlock::Update(float deltaTime, Pvector playerPos, Playership* player)
+void FactoryFlock::Update(float deltaTime, Pvector playerPos, Playership* player, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos)
 {
 	//Update Flock
 	for (int i = 0; i < flock.size(); i++)
@@ -31,7 +31,7 @@ void FactoryFlock::Update(float deltaTime, Pvector playerPos, Playership* player
 			}
 		}
 
-		flock[i]->Update(deltaTime, flock, playerPos);
+		flock[i]->Update(deltaTime, flock, playerPos, asteroidSizeAndPos);
 
         //Collision with interceptor missiles
         std::vector<sf::FloatRect> interceptorMissileBounds = flock[i]->GetMissileBounds();

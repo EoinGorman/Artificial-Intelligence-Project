@@ -17,6 +17,7 @@ Spaceship::Spaceship()
 	m_direction = sf::Vector2f(1, 0);
 	m_bounds = sf::FloatRect(m_position.x, m_position.y, m_width, m_height);
 	m_sprite.setOrigin(m_width / 2, m_height / 2);
+    m_sprite.setPosition(m_position);
 }
 
 Spaceship::Spaceship(sf::Vector2f pos, sf::Vector2f dir, sf::FloatRect bounds)
@@ -34,6 +35,7 @@ Spaceship::Spaceship(sf::Vector2f pos, sf::Vector2f dir, sf::FloatRect bounds)
 	m_direction = dir;
 	m_bounds = bounds;
 	m_sprite.setOrigin(m_width / 2, m_height / 2);
+    m_sprite.setPosition(m_position);
 }
 
 void Spaceship::Update(float deltaTime)

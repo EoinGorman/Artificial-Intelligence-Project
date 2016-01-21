@@ -11,7 +11,7 @@ InterceptorMissile::InterceptorMissile()
     m_sprite.setTexture(m_texture, true);
     m_width = m_sprite.getLocalBounds().width;
     m_height = m_sprite.getLocalBounds().height;
-    m_speed = MaxSpeed;
+    m_speed = MaxSpeed / 4;
     m_position = sf::Vector2f(0, 0);
     m_direction = sf::Vector2f(1, 0);
     m_bounds = sf::FloatRect(m_position.x, m_position.y, m_width, m_height);
@@ -26,7 +26,7 @@ InterceptorMissile::InterceptorMissile(sf::Vector2f pos, float angle, sf::FloatR
     m_sprite.setTexture(m_texture, true);
     m_width = m_sprite.getLocalBounds().width;
     m_height = m_sprite.getLocalBounds().height;
-    m_speed = MaxSpeed;
+    m_speed = MaxSpeed / 4;
     m_position = pos - sf::Vector2f(m_width / 2, m_height / 2);
     m_direction = targetPos - m_position;
     //normalise direction
@@ -73,6 +73,15 @@ sf::Vector2f InterceptorMissile::GetPosition()
 
 void InterceptorMissile::Move(float deltaTime, sf::Vector2f targetPos)
 {
+    if (m_speed < MaxSpeed)
+    {
+        m_speed += MaxSpeed / 4 * deltaTime;
+        if (m_speed > MaxSpeed)
+        {
+            m_speed = MaxSpeed;
+        }
+    }
+
     m_direction = targetPos - m_position;
     //normalise direction
     float mag = sqrt(m_direction.x * m_direction.x + m_direction.y * m_direction.y); //Magnitude of vector formula
