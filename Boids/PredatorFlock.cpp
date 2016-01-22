@@ -1,5 +1,10 @@
 #include "PredatorFlock.h"
 
+PredatorFlock::PredatorFlock()
+{
+    //nothin
+}
+
 PredatorFlock::PredatorFlock(int amount, sf::FloatRect bounds)
 {
 
@@ -9,9 +14,10 @@ PredatorFlock::PredatorFlock(int amount, sf::FloatRect bounds)
 		float randY = std::rand() % 3500;
 		flock.push_back(new Predator(sf::Vector2f(randX, randY), sf::Vector2f(((std::rand() % 200) - 100) / 100.0f, ((std::rand() % 200) - 100) / 100.0f), bounds));
 	}
+
 }
 
-void PredatorFlock::Update(float deltaTime, Pvector playerPos, Playership* player)
+void PredatorFlock::Update(float deltaTime, Pvector playerPos, Playership* player, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos)
 {
 	//Update Flock
 	for (int i = 0; i < flock.size(); i++)
@@ -41,7 +47,7 @@ void PredatorFlock::Update(float deltaTime, Pvector playerPos, Playership* playe
 				break;
 			}
 		}
-		flock[i]->Update(deltaTime, flock, playerPos);
+		flock[i]->Update(deltaTime, flock, playerPos, asteroidSizeAndPos);
 	}
 	//Collision with interceptor missiles
 	
@@ -82,4 +88,11 @@ std::vector<sf::Rect<float>> PredatorFlock::GetPredatorBounds()
 	}
 
 	return flockBounds;
+}
+
+void PredatorFlock::AddShip(sf::Vector2f position, sf::FloatRect bounds)
+{
+    float randX = ((std::rand() % 200) - 100) / 100.0f;
+    float randY = ((std::rand() % 200) - 100) / 100.0f;
+    flock.push_back(new Predator(position, sf::Vector2f(randX, randY), bounds));
 }

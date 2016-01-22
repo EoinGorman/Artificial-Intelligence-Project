@@ -25,15 +25,15 @@ Predator::Predator(sf::Vector2f pos, sf::Vector2f dir, sf::FloatRect bounds)
 	m_sprite.setRotation(atan2(m_direction.y, m_direction.x));
 }
 
-void Predator::Update(float deltaTime, std::vector<Predator*> flock, Pvector playerPos)
+void Predator::Update(float deltaTime, std::vector<Predator*> flock, Pvector playerPos, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos)
 {
 	switch (currentState)
 	{
 	case Seeking:
-		Finding(deltaTime,playerPos);
+		Finding(deltaTime,playerPos, asteroidSizeAndPos);
 		break;
 	case Flocking:
-		Flock(flock, deltaTime, playerPos);
+		Flock(flock, deltaTime, playerPos, asteroidSizeAndPos);
 		break;
 	}
 
@@ -89,7 +89,7 @@ void Predator::Move(float deltaTime)
 }
 
 
-void Predator::Flock(std::vector<Predator*> flock, float deltaTime, Pvector playerPos)
+void Predator::Flock(std::vector<Predator*> flock, float deltaTime, Pvector playerPos, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos)
 {
 	m_speed = 100;
 
@@ -101,7 +101,7 @@ void Predator::Flock(std::vector<Predator*> flock, float deltaTime, Pvector play
 	//
 	if (playerPos.distance(Pvector(m_position.x, m_position.y)) > 250.0f)
 	{
-		Pvector ali = Finding(deltaTime, playerPos);
+		Pvector ali = Finding(deltaTime, playerPos, asteroidSizeAndPos);
 		ali.mulScalar(1.0); // Might need to alter weights for different characteristics
 		ApplyForce(ali);
 	}
@@ -114,7 +114,7 @@ void Predator::Flock(std::vector<Predator*> flock, float deltaTime, Pvector play
 	}
 	//
 
-	Pvector sep = Separation(flock, playerPos);
+	Pvector sep = Separation(flock, playerPos, asteroidSizeAndPos);
 	Pvector coh = Cohesion(deltaTime,flock);
 	// Arbitrarily weight these forces
 	sep.mulScalar(1.5);
@@ -126,7 +126,7 @@ void Predator::Flock(std::vector<Predator*> flock, float deltaTime, Pvector play
 }
 
 // Three Laws that boids follow
-Pvector Predator::Separation(vector<Predator*> flock, Pvector playerPos)
+Pvector Predator::Separation(vector<Predator*> flock, Pvector playerPos, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos)
 {
 	// Distance of field of vision for separation between boids
 	float desiredseparation = 50;
@@ -151,6 +151,28 @@ Pvector Predator::Separation(vector<Predator*> flock, Pvector playerPos)
 			count++;
 		}
 	}
+
+    /*
+    //For each asteroid check for seperation
+    for (int i = 0; i < asteroidSizeAndPos.size(); i++)
+    {
+        Pvector otherLocation(std::get<1>(asteroidSizeAndPos[i]));
+        // Calculate distance from current boid to boid we're looking at
+        float d = location.distance(otherLocation);
+        // If this is a fellow boid and it's too close, move away from it
+        if (d < std::get<0>(asteroidSizeAndPos[i]) * 2)
+        {
+            Pvector diff(0, 0);
+            diff = diff.subTwoVector(location, otherLocation);
+            diff.normalize();
+            diff.mulScalar(3);
+            //diff.mulScalar(30);      // Weight
+            steer.addVector(diff);
+            count++;
+        }
+    }
+    */
+
 	//this is where we run from the player
 	if (location.distance(playerPos) < 200)
 	{
@@ -254,7 +276,7 @@ Pvector Predator::Seek(float deltaTime,Pvector v)
 	return acceleration;
 }
 
-Pvector Predator::Finding(float deltaTime,Pvector playerPos)
+Pvector Predator::Finding(float deltaTime,Pvector playerPos, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos)
 {
 	//m_speed = 350;
 	

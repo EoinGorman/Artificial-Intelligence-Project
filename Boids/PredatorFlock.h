@@ -13,11 +13,13 @@
 class PredatorFlock
 {
 public:
-	PredatorFlock(int amount, sf::FloatRect bounds);
-	void Update(float deltaTime, Pvector playerPos, Playership* player);
+    PredatorFlock();
+    PredatorFlock(int amount, sf::FloatRect bounds);
+	void Update(float deltaTime, Pvector playerPos, Playership* player, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos);
 	void Draw(sf::RenderWindow* window);
     void DrawRadarImage(sf::RenderWindow* window);
-
+    
+    void AddShip(sf::Vector2f position, sf::FloatRect bounds);
 	void DestroyShip(int index);
 	std::vector<sf::Rect<float>> GetPredatorBounds();
 

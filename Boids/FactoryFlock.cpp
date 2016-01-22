@@ -1,18 +1,22 @@
 #include "FactoryFlock.h"
+#define PredatorCreationTime 5
 
 FactoryFlock::FactoryFlock(int amount, sf::FloatRect bounds)
 {
-
+    m_bounds = bounds;
 	for (int i = 0; i < amount; i++)
 	{
 		float randX = std::rand() % 5000;
 		float randY = std::rand() % 3500;
-		flock.push_back(new Factory(sf::Vector2f(randX, randY), sf::Vector2f(((std::rand() % 200) - 100) / 100.0f, ((std::rand() % 200) - 100) / 100.0f), bounds));
+		flock.push_back(new Factory(sf::Vector2f(randX, randY), sf::Vector2f(((std::rand() % 200) - 100) / 100.0f, ((std::rand() % 200) - 100) / 100.0f), m_bounds));
 	}
+    predatorFlock = PredatorFlock(0, m_bounds);
+    timer = PredatorCreationTime;
 }
 
 void FactoryFlock::Update(float deltaTime, Pvector playerPos, Playership* player, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos)
 {
+    SpawnTimer(deltaTime);
 	//Update Flock
 	for (int i = 0; i < flock.size(); i++)
 	{
@@ -45,8 +49,10 @@ void FactoryFlock::Update(float deltaTime, Pvector playerPos, Playership* player
                 break;
             }
         }
-
 	}
+
+    //Update Predators
+    predatorFlock.Update(deltaTime, Pvector(player->GetPosition().x, player->GetPosition().y), player, asteroidSizeAndPos);
 }
 
 void FactoryFlock::Draw(sf::RenderWindow* window)
@@ -56,6 +62,8 @@ void FactoryFlock::Draw(sf::RenderWindow* window)
 	{
 		flock[i]->Draw(window);
 	}
+
+    predatorFlock.Draw(window);
 }
 
 
@@ -65,6 +73,8 @@ void FactoryFlock::DrawRadarImage(sf::RenderWindow* window)
     {
         flock[i]->DrawRadarImage(window);
     }
+
+    predatorFlock.DrawRadarImage(window);
 }
 
 void FactoryFlock::DestroyShip(int index)
@@ -109,4 +119,32 @@ std::vector<sf::Rect<float>> FactoryFlock::GetMissileBounds()
         }
     }
     return missileBounds;
+}
+
+void FactoryFlock::SpawnTimer(float deltaTime)
+{
+    timer += deltaTime;
+
+    if (timer >= PredatorCreationTime)
+    {
+        SpawnPredator();
+        timer = 0;
+    }
+}
+
+void FactoryFlock::SpawnPredator()
+{
+    int rand = std::rand() % flock.size();
+    predatorFlock.AddShip(flock[rand]->GetPosition(), m_bounds);
+}
+
+std::vector<sf::Rect<float>> FactoryFlock::GetPredatorBounds()
+{
+    return predatorFlock.GetPredatorBounds();
+}
+
+
+void FactoryFlock::DestroyPredatorShip(int index)
+{
+    predatorFlock.DestroyShip(index);
 }

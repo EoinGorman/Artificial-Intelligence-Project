@@ -13,7 +13,7 @@ public:
 	};
 
 	Predator(sf::Vector2f pos, sf::Vector2f dir, sf::FloatRect bounds);
-	void Update(float deltaTime, std::vector<Predator*> flock, Pvector playerPos);
+	void Update(float deltaTime, std::vector<Predator*> flock, Pvector playerPos, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos);
 	void Predator::Draw(sf::RenderWindow* window);
 	State GetState();
 	void SetState(State newState);
@@ -26,10 +26,10 @@ private:
 
 	void CheckForShoot(float deltaTime, Pvector playerPos);
 	void Move(float deltaTime);
-	Pvector Finding(float deltaTime, Pvector playertPos);
-	void Flock(std::vector<Predator*> flock, float deltaTime, Pvector playerPos);
+	Pvector Finding(float deltaTime, Pvector playertPos, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos);
+	void Flock(std::vector<Predator*> flock, float deltaTime, Pvector playerPos, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos);
 	// Three Laws that boids follow
-	Pvector Separation(vector<Predator*> flock, Pvector playerPos);
+	Pvector Separation(vector<Predator*> flock, Pvector playerPos, std::vector<std::tuple<float, Pvector>> asteroidSizeAndPos);
 	Pvector Alignment(vector<Predator*> flock);
 	Pvector Cohesion(float deltaTime,vector<Predator*> flock);
 	Pvector Seek(float deltaTime,Pvector v);
